@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>♥</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: rgb(255, 230, 243);
+      color: rgb(59, 20, 67);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .block {
+      width: 100%;
+      max-width: 500px;
+      min-height: 300px;
+      background-color: rgb(255, 187, 225);
+      border-radius: 25px;
+      box-shadow: 0 0 20px rgba(255, 155, 220, 0.5);
+      padding: 30px;
+      text-align: center;
+      display: none;
+      position: absolute;
+    }
+
+    .block.active {
+      display: block;
+    }
+
+    input.form-control {
+      font-size: 20px;
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .btn {
+      font-size: 20px;
+      border-radius: 15px;
+      padding: 10px 20px;
+      margin: 10px;
+    }
+
+    .heart {
+      position: fixed;
+      animation: float 4s ease-in infinite;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-50px) scale(1.2);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-200px) scale(1.5);
+        opacity: 0;
+      }
+    }
+    .img-fixada {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 180px;
+        pointer-events: none;
+    }
+
+    .img-direita {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 180px;
+        pointer-events: none;
+    }
+
+
+    h1 {
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Música fofa -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/01/audio_3b20a4c09a.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- Etapas -->
+  <div class="block active" id="b0">
+    <h1>✨ Quem é você? ✨</h1>
+    <input type="text" id="nome" class="form-control mb-3" placeholder="Digite seu nome 💬" />
+    <button class="btn btn-outline-dark" onclick="who()">Enviar 💌</button>
+  </div>
+
+  <div class="block" id="b01">
+    <h1>Hmm... esse site não é pra você!!! 😤</h1>
+    <img src="pngimg.com - cat_PNG50498.png" alt="gato brabo" class="img-fixada">
+
+  </div>
+
+  <div class="block" id="b1">
+    <h1>Tem certeza que é você mesmo? 😳</h1>
+    <button class="btn btn-outline-danger" onclick="respCerta(false)">Não 😬</button>
+    <button class="btn btn-outline-primary" onclick="respCerta(true)">Sim 🥺</button>
+  </div>
+
+  <div class="block" id="b2">
+    <h1>Qual doce é o meu favorito? 🍬</h1>
+    <input type="text" id="doce" class="form-control mb-3" placeholder="Não é dificil vai 😜" />
+    <button class="btn btn-outline-dark" onclick="verifDoce()">Enviar ❤️</button>
+    <img src="pngimg.com - cat_PNG50485.png" alt="gato curioso" class="img-fixada">
+
+  </div>
+
+  <div id="final" class="block">
+    <h1>♥!! Noah !!♥</h1> <br>
+    <h1>💖💕💘Ti amuuuu💖💕💘</h1>
+    <img src="pngimg.com - cat_PNG92.png" alt="gato fofo" class="img-direita">
+
+  </div>
+
+  <script>
+    function showBlock(id) {
+      document.querySelectorAll('.block').forEach(div => div.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function who() {
+      const nome = document.getElementById("nome").value.trim().toLowerCase();
+      if (nome === "noah") {
+        showBlock("b1");
+      } else {
+        showBlock("b01");
+      }
+    }
+
+    function respCerta(confirmado) {
+      if (confirmado) {
+        showBlock("b2");
+      } else {
+        showBlock("b01");
+      }
+    }
+
+    function verifDoce() {
+      const doce = document.getElementById("doce").value.trim().toLowerCase();
+      if (doce === "paçoca") {
+        showBlock("final");
+        // Gerar corações infinitamente
+        for (let i=0; i<10; i++) {
+          coracoes("💕");
+          coracoes("❤️");
+        }
+      } else {
+        alert("Tsk tsk... errou 😠");
+        showBlock("b01");
+      }
+    }
+
+    function coracoes(emoji) {
+      const quantidade = 10;
+      for (let i = 0; i < quantidade; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = emoji;
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.fontSize = Math.random() * 30 + 20 + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => {
+          heart.remove();
+        }, 4000);
+      }
+    }
+  </script>
+
+</body>
+</html>

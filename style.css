@@ -1,0 +1,37 @@
+body{
+    background-color: rgb(248, 207, 237);
+    color: rgb(35, 22, 50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif, bold;
+    font-size: 30px;
+}
+
+.block{
+    width: 600px;
+    height: 600px;
+    background-color: rgb(250, 151, 191);
+    border-radius: 20px;
+    box-shadow: 2 0 2 0.5;
+    border-color:  rgb(35, 22, 50);
+}
+
+#b1{
+    z-index: 1;
+    position: absolute;
+}
+
+#b0{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    position: absolute;
+    flex-direction: column;
+}
+
+#b2{
+    z-index: 2;
+    position: absolute;
+}
